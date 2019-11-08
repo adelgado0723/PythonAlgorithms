@@ -6,6 +6,9 @@ class BinaryTree:
     def __init__(self):
         self.root = None
 
+    def get_root(self):
+        return self.root
+
     def add(self, value):
         if(self.root is None):
             self.root = BinaryNode.BinaryNode(value)
@@ -129,48 +132,56 @@ class BinaryTree:
 
         # Fetch the parent
         parent = self._find_parent(value, node)
-        is_left_child = False
+        to_be_removed_ref = None
+        
         if(parent is None):
           # to_be_removed is the root
+          to_be_removed_ref = self.root
         else:
-          # Is to_be_removed the left or right child
+            # Is to_be_removed the left or right child
             if (parent.left.value == to_be_removed.value):
-                is_left_child = True
+                to_be_removed_ref = parent.left
+            else:
+                to_be_removed_ref = parent.right
 
+        # set the parent's reference to None
         # If it is a leaf:
         if (to_be_removed.left is None and to_be_removed.right is None):
-            # set the parent's reference to None
-            if(is_left_child):
-                parent.left = None
-            else:
-                parent.right = None
-
-            # Else If it has a right child
+            to_be_removed_ref = None
+        # Else If it has a right child and no left child
+        elif(to_be_removed.left is None):
             # Set the parent's reference to the right child sub-tree
-            # Else If it has a left child
+            to_be_removed_ref = to_be_removed.right
+        # Else If it has a left child and no right child
+        elif(to_be_removed.right is None):
             # Set the parent's reference to the left child sub-tree
-            # Else if it has two children
+            to_be_removed_ref = to_be_removed.left
+        # Else if it has two children
+        else:
             # Set the parent's reference to the left child sub-tree
+            to_be_removed_ref = to_be_removed.left
             # then, find the max node in that left sub-tree and
+            left_tree_max = self._find_max_node(to_be_removed.left)
             # attach the right sub-tree to that node's right reference
+            left_tree_max.right = to_be_removed.right
 
 
-def main():
-    tree = BinaryTree()
+# def main():
+#     tree = BinaryTree()
 
-    tree.add(30)
-    tree.add(43)
-    tree.add(10)
-    tree.add(34)
-    tree.add(21)
-    tree.add(40)
-    tree.add(15)
-    tree.add(45)
-    tree.add(44)
-    tree.add(46)
-    tree.add(46)
-    tree.add(46)
-    tree.add(46)
+#     tree.add(30)
+#     tree.add(43)
+#     tree.add(10)
+#     tree.add(34)
+#     tree.add(21)
+#     tree.add(40)
+#     tree.add(15)
+#     tree.add(45)
+#     tree.add(44)
+#     tree.add(46)
+#     tree.add(46)
+#     tree.add(46)
+#     tree.add(46)
 
     # print("Printing In Order:")
     # tree.print_in_order()
@@ -185,14 +196,14 @@ def main():
     # print("\nLowest Value = ")
     # tree.print_value(tree.find_min_node())
 
-    tree.print_value(tree.find(46))
-    tree.print_value(tree.find(10))
+#     tree.print_value(tree.find(46))
+#     tree.print_value(tree.find(10))
 
-    empty_tree = BinaryTree()
+#     empty_tree = BinaryTree()
 
-    empty_tree.print_value(empty_tree.find(10))
-    empty_tree.print_value(empty_tree.find_max_node())
-    empty_tree.print_value(empty_tree.find_min_node())
+#     empty_tree.print_value(empty_tree.find(10))
+#     empty_tree.print_value(empty_tree.find_max_node())
+#     empty_tree.print_value(empty_tree.find_min_node())
 
 
-main()
+# main()

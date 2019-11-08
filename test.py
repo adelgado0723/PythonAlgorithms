@@ -1,5 +1,5 @@
 def main():
-    print("Hello There!")
+    traverse("Hello There!")
 
 
 main()
