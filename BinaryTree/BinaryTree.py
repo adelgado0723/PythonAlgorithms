@@ -135,8 +135,8 @@ class BinaryTree:
         to_be_removed_ref = None
         
         if(parent is None):
-          # to_be_removed is the root
-          to_be_removed_ref = self.root
+            # to_be_removed is the root
+            to_be_removed_ref = self.root
         else:
             # Is to_be_removed the left or right child
             if (parent.left.value == to_be_removed.value):
