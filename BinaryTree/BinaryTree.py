@@ -1,6 +1,5 @@
 import BinaryNode
 
-
 class BinaryTree:
 
     def __init__(self):
@@ -114,8 +113,8 @@ class BinaryTree:
     # Remove Node Given a Value
     def remove(self, value):
         if(self.root is not None):
-            return self.remove(value, self.root)
-
+            return self._remove(value, self.root)
+    
     def _remove(self, value, node):
 
         # Find if there is a node in the tree with that value
@@ -165,45 +164,6 @@ class BinaryTree:
             # attach the right sub-tree to that node's right reference
             left_tree_max.right = to_be_removed.right
 
+        return to_be_removed_ref
 
-# def main():
-#     tree = BinaryTree()
-
-#     tree.add(30)
-#     tree.add(43)
-#     tree.add(10)
-#     tree.add(34)
-#     tree.add(21)
-#     tree.add(40)
-#     tree.add(15)
-#     tree.add(45)
-#     tree.add(44)
-#     tree.add(46)
-#     tree.add(46)
-#     tree.add(46)
-#     tree.add(46)
-
-    # print("Printing In Order:")
-    # tree.print_in_order()
-    # print("\nPrinting Pre Order:")
-    # tree.print_pre_order()
-    # print("\nPrinting Post Order:")
-    # tree.print_post_order()
-
-    # print("\nHighest Value = ")
-    # tree.print_value(tree.find_max_node())
-
-    # print("\nLowest Value = ")
-    # tree.print_value(tree.find_min_node())
-
-#     tree.print_value(tree.find(46))
-#     tree.print_value(tree.find(10))
-
-#     empty_tree = BinaryTree()
-
-#     empty_tree.print_value(empty_tree.find(10))
-#     empty_tree.print_value(empty_tree.find_max_node())
-#     empty_tree.print_value(empty_tree.find_min_node())
-
-
-# main()
+        #TODO: implement height()
