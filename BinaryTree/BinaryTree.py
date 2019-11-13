@@ -165,5 +165,22 @@ class BinaryTree:
             left_tree_max.right = to_be_removed.right
 
         return to_be_removed_ref
+      
+    # Returns height in terms of number of nodes from root to furthest leaf
+    def get_height(self):
+        return self._get_height(self.root)
 
-        #TODO: implement height()
+    def _get_height(self, node):
+        # This if statement could be changed to:
+        # if(node is None or (node.left is None and node.right is None)):
+        # if we wanted a height based on the number of edges
+        if(node is None):
+            return 0
+        
+        left_tree_height = self._get_height(node.left)
+        right_tree_height = self._get_height(node.right)
+
+        if (left_tree_height > right_tree_height):
+            return left_tree_height + 1
+        else: 
+            return right_tree_height + 1

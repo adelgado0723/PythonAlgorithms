@@ -35,19 +35,21 @@ class TestBinaryTree(unittest.TestCase):
         self.tree.add(46)
 
         
-
+    # Testing get_root
     def test_get_root(self):
         self.assertEqual(self.tree.get_root().value, 30)
 
     def test_get_root_when_empty_tree(self):
         self.assertIsNone(self.empty_tree.get_root())
 
+    # Testing find_max_node
     def test_find_max_node(self):
         self.assertEqual(self.tree.find_max_node().value, 46)
     
     def test_find_max_node_when_empty_tree(self):
         self.assertEqual(self.empty_tree.find_max_node(), None)
 
+    # Testing find_min_node
     def test_find_min_node(self):
         self.assertEqual(self.tree.find_min_node().value, 10)
 
@@ -57,6 +59,14 @@ class TestBinaryTree(unittest.TestCase):
   
     #TODO: Test find(value)
     #TODO: Test remove(value)
+
+    # Testing get_height
+    def test_get_height(self):
+      self.assertEqual(self.tree.get_height(), 4)
+
+    def test_get_height_when_empty_tree(self):
+      self.assertEqual(self.empty_tree.get_height(), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
