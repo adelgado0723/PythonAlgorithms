@@ -3,7 +3,7 @@ import os.path
 utilsdir = os.path.dirname(__file__)
 sys.path.append(os.path.split(utilsdir)[0])
 import Utils.Utils as utils
-import BinaryTree
+import BinarySearchTree as bst
 import unittest
 
 class TestBinaryTree(unittest.TestCase):
@@ -23,21 +23,21 @@ class TestBinaryTree(unittest.TestCase):
 # All nodes should have a count == 1
 # except for 46 with count == 4
 
-        self.empty_tree = BinaryTree.BinaryTree()
-        self.tree = BinaryTree.BinaryTree()
-        self.tree.add(30)
-        self.tree.add(43)
-        self.tree.add(10)
-        self.tree.add(34)
-        self.tree.add(21)
-        self.tree.add(40)
-        self.tree.add(15)
-        self.tree.add(45)
-        self.tree.add(44)
-        self.tree.add(46)
-        self.tree.add(46)
-        self.tree.add(46)
-        self.tree.add(46)
+        self.empty_tree = bst.BinarySearchTree()
+        self.tree = bst.BinarySearchTree()
+        self.tree.insert(30)
+        self.tree.insert(43)
+        self.tree.insert(10)
+        self.tree.insert(34)
+        self.tree.insert(21)
+        self.tree.insert(40)
+        self.tree.insert(15)
+        self.tree.insert(45)
+        self.tree.insert(44)
+        self.tree.insert(46)
+        self.tree.insert(46)
+        self.tree.insert(46)
+        self.tree.insert(46)
 
         
     # Testing get_root

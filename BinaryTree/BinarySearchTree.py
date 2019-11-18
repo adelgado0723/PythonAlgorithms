@@ -1,6 +1,6 @@
 import BinaryNode
 
-class BinaryTree:
+class BinarySearchTree:
 
     def __init__(self):
         self.root = None
@@ -8,23 +8,23 @@ class BinaryTree:
     def get_root(self):
         return self.root
 
-    def add(self, value):
+    def insert(self, value):
         if(self.root is None):
             self.root = BinaryNode.BinaryNode(value)
         else:
-            self._add_in_order(value, self.root)
+            self._insert_in_order(value, self.root)
 
-    def _add_in_order(self, value, node):
+    def _insert_in_order(self, value, node):
         if(value < node.value):
             if(node.left is None):
                 node.left = BinaryNode.BinaryNode(value)
             else:
-                self._add_in_order(value, node.left)
+                self._insert_in_order(value, node.left)
         elif(value > node.value):
             if(node.right is None):
                 node.right = BinaryNode.BinaryNode(value)
             else:
-                self._add_in_order(value, node.right)
+                self._insert_in_order(value, node.right)
         else:
             node.count += 1
 
@@ -221,13 +221,13 @@ class BinaryTree:
         return self._size_no_dups(node.left) + self._size_no_dups(node.right) + 1
             
 if __name__ == "__main__":
-    tree = BinaryTree()
-    tree.add(10)
-    tree.add(3)
-    tree.add(14)
-    tree.add(9)
-    tree.add(12)
-    tree.add(18)
+    tree = BinarySearchTree()
+    tree.insert(10)
+    tree.insert(3)
+    tree.insert(14)
+    tree.insert(9)
+    tree.insert(12)
+    tree.insert(18)
     
     tree.print_in_order()
     tree_list = tree.list_in_order()
