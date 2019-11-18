@@ -36,7 +36,8 @@ class BinaryTree:
 
     def _insert_into_list(self, node, node_list):
         if(node is not None and node.value is not None):
-            node_list.append(node.value)
+            for i in range(node.count):
+                node_list.append(node.value)
         
     def make_list(self, traversal_method):
         node_list = []
@@ -203,6 +204,21 @@ class BinaryTree:
         else: 
             return right_tree_height + 1
 
+    def size(self):
+        return self._size(self.root)
+      
+    def _size(self, node):
+        if node is None:
+            return 0
+        return self._size(node.left) + self._size(node.right) + node.count
+
+    def size_no_dups(self):
+        return self._size_no_dups(self.root)
+      
+    def _size_no_dups(self, node):
+        if node is None:
+            return 0
+        return self._size_no_dups(node.left) + self._size_no_dups(node.right) + 1
             
 if __name__ == "__main__":
     tree = BinaryTree()

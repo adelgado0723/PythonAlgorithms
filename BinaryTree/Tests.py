@@ -85,13 +85,27 @@ class TestBinaryTree(unittest.TestCase):
 
     # Testing list_in_order
     def test_list_in_order(self):
-        in_order_list = [10, 15, 21, 30, 34, 40, 43, 44, 45, 46]
+        in_order_list = [10, 15, 21, 30, 34, 40, 43, 44, 45, 46, 46, 46, 46]
         in_order_from_tree = self.tree.list_in_order()
         self.assertTrue(utils.lists_have_same_elems_in_order(in_order_list, in_order_from_tree))
     
     def test_list_in_order_when_empty_tree(self):
         self.assertEqual(self.empty_tree.list_in_order(), [])
     
+    # Testing size
+    def test_size(self):
+        self.assertEqual(self.tree.size(), 13)
+
+    def test_size_when_empty_tree(self):
+        self.assertEqual(self.empty_tree.size(), 0)
+
+    # Testing size_no_dups
+    def test_size_no_dups(self):
+        self.assertEqual(self.tree.size_no_dups(), 10)
+
+    def test_size_no_dups_when_empty_tree(self):
+        self.assertEqual(self.empty_tree.size_no_dups(), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
