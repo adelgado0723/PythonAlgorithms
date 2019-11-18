@@ -34,32 +34,50 @@ class BinaryTree:
         else:
             print("Either the node or its value is None")
 
+    def _insert_into_list(self, node, node_list):
+        if(node is not None and node.value is not None):
+            node_list.append(node.value)
+        
+    def make_list(self, traversal_method):
+        node_list = []
+        traversal_method(self.root, self._insert_into_list, node_list)
+        return node_list
+    
+    def list_in_order(self):
+        return self.make_list(self._traverse_in_order)
+    
+    def list_pre_order(self):
+        return self.make_list(self._traverse_pre_order)
+    
+    def list_post_order(self):
+        return self.make_list(self._traverse_post_order)
+
     def print_in_order(self):
         self._traverse_in_order(self.root, self.print_value)
 
-    def _traverse_in_order(self, node, fn):
+    def _traverse_in_order(self, node, fn, *args):
         if(node is not None):
-            self._traverse_in_order(node.left, fn)
-            fn(node)
-            self._traverse_in_order(node.right, fn)
+            self._traverse_in_order(node.left, fn, *args)
+            fn(node, *args)
+            self._traverse_in_order(node.right, fn, *args)
 
     def print_pre_order(self):
         self._traverse_pre_order(self.root, self.print_value)
 
-    def _traverse_pre_order(self, node, fn):
+    def _traverse_pre_order(self, node, fn, *args):
         if(node is not None):
-            fn(node)
-            self._traverse_pre_order(node.left, fn)
-            self._traverse_pre_order(node.right, fn)
+            fn(node, *args)
+            self._traverse_pre_order(node.left, fn, *args)
+            self._traverse_pre_order(node.right, fn, *args)
 
     def print_post_order(self):
         self._traverse_post_order(self.root, self.print_value)
 
-    def _traverse_post_order(self, node, fn):
+    def _traverse_post_order(self, node, fn, *args):
         if(node is not None):
-            self._traverse_post_order(node.left, fn)
-            self._traverse_post_order(node.right, fn)
-            fn(node)
+            self._traverse_post_order(node.left, fn, *args)
+            self._traverse_post_order(node.right, fn, *args)
+            fn(node, *args)
 
     def find_max_node(self):
         if(self.root is not None):
@@ -167,7 +185,7 @@ class BinaryTree:
         return to_be_removed_ref
       
     # Returns height in terms of number of nodes from root to furthest leaf
-    def get_height(self):
+    def height(self):
         return self._get_height(self.root)
 
     def _get_height(self, node):
@@ -184,3 +202,19 @@ class BinaryTree:
             return left_tree_height + 1
         else: 
             return right_tree_height + 1
+
+            
+if __name__ == "__main__":
+    tree = BinaryTree()
+    tree.add(10)
+    tree.add(3)
+    tree.add(14)
+    tree.add(9)
+    tree.add(12)
+    tree.add(18)
+    
+    tree.print_in_order()
+    tree_list = tree.list_in_order()
+    for item in tree_list:
+      print(item)
+    
