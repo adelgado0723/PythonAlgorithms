@@ -72,8 +72,22 @@ class TestBinaryTree(unittest.TestCase):
         self.assertIsNone(self.empty_tree.find(46))
 
     #Testing remove
-    # def remove_node_in_tree(self):
-        # self.assertEqual();
+    def test_remove_duplicate_node_in_tree(self):
+        remove_test_tree = bst.BinarySearchTree();
+
+        remove_test_tree.insert(40)
+        remove_test_tree.insert(46)
+        remove_test_tree.insert(46)
+        remove_test_tree.remove(46)
+        self.assertEqual(remove_test_tree.find(46).count, 1)
+    
+    #TODO: remove() isn't working... this test fails
+    def test_remove_root_from_single_node_tree(self):
+        remove_test_tree = bst.BinarySearchTree();
+        remove_test_tree.insert(40)
+        remove_test_tree.remove(40)
+        root = remove_test_tree.get_root()
+        self.assertIsNone(root);
     
 
     # Testing get_height
