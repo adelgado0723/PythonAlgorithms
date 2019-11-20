@@ -132,58 +132,117 @@ class BinarySearchTree:
     # Remove Node Given a Value
     def remove(self, value):
         if(self.root is not None):
-            return self._remove(value, self.root)
+            self.root = self._remove(self.root, value)
     
-    def _remove(self, value, node):
+    # def _remove(self, value, node):
 
-        # Find if there is a node in the tree with that value
-        # If not, just return
-        to_be_removed = self._find(value, node)
+    #     # Find if there is a node in the tree with that value
+    #     # If not, just return
+    #     to_be_removed = self._find(value, node)
 
-        if(to_be_removed is None):
-            return
+    #     if(to_be_removed is None):
+    #         return
 
-        # If the count is greater than 1, decrement the count
-        if(to_be_removed.count > 1):
-            to_be_removed.count -= 1
-            return
+    #     # If the count is greater than 1, decrement the count
+    #     if(to_be_removed.count > 1):
+    #         to_be_removed.count -= 1
+    #         return
 
-        # Fetch the parent
-        parent = self._find_parent(value, node)
-        to_be_removed_ref = None
+    #     # Fetch the parent
+    #     parent = self._find_parent(value, node)
+    #     to_be_removed_ref = None
         
-        if(parent is None):
-            # to_be_removed is the root
-            to_be_removed_ref = self.root
-        else:
-            # Is to_be_removed the left or right child
-            if (parent.left.value == to_be_removed.value):
-                to_be_removed_ref = parent.left
-            else:
-                to_be_removed_ref = parent.right
+    #     if(parent is None):
+    #         # to_be_removed is the root
+    #         to_be_removed_ref = self.root
+    #     else:
+    #         # Is to_be_removed the left or right child
+    #         if (parent.left.value == to_be_removed.value):
+    #             to_be_removed_ref = parent.left
+    #         else:
+    #             to_be_removed_ref = parent.right
 
-        # set the parent's reference to None
-        # If it is a leaf:
-        if (to_be_removed.left is None and to_be_removed.right is None):
-            to_be_removed_ref = None
-        # Else If it has a right child and no left child
-        elif(to_be_removed.left is None):
-            # Set the parent's reference to the right child sub-tree
-            to_be_removed_ref = to_be_removed.right
-        # Else If it has a left child and no right child
-        elif(to_be_removed.right is None):
-            # Set the parent's reference to the left child sub-tree
-            to_be_removed_ref = to_be_removed.left
-        # Else if it has two children
-        else:
-            # Set the parent's reference to the left child sub-tree
-            to_be_removed_ref = to_be_removed.left
-            # then, find the max node in that left sub-tree and
-            left_tree_max = self._find_max_node(to_be_removed.left)
-            # attach the right sub-tree to that node's right reference
-            left_tree_max.right = to_be_removed.right
+    #     # set the parent's reference to None
+    #     # If it is a leaf:
+    #     if (to_be_removed.left is None and to_be_removed.right is None):
+    #         to_be_removed_ref = None
+    #     # Else If it has a right child and no left child
+    #     elif(to_be_removed.left is None):
+    #         # Set the parent's reference to the right child sub-tree
+    #         to_be_removed_ref = to_be_removed.right
+    #     # Else If it has a left child and no right child
+    #     elif(to_be_removed.right is None):
+    #         # Set the parent's reference to the left child sub-tree
+    #         to_be_removed_ref = to_be_removed.left
+    #     # Else if it has two children
+    #     else:
+    #         # Set the parent's reference to the left child sub-tree
+    #         to_be_removed_ref = to_be_removed.left
+    #         # then, find the max node in that left sub-tree and
+    #         left_tree_max = self._find_max_node(to_be_removed.left)
+    #         # attach the right sub-tree to that node's right reference
+    #         left_tree_max.right = to_be_removed.right
 
-        return to_be_removed_ref
+    #     return to_be_removed_ref
+
+    # Given a binary search tree and a key, this function 
+    # delete the key and returns the new root 
+    
+    # From: https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+    def _remove(self, root, key): 
+  
+        # Base Case 
+        if root is None: 
+            return root  
+
+        # If the key to be deleted is smaller than the root's 
+        # key then it lies in  left subtree 
+        if key < root.value: 
+            root.left = self._remove(root.left, key) 
+
+        # If the kye to be delete is greater than the root's key 
+        # then it lies in right subtree 
+        elif(key > root.value): 
+            root.right = self._remove(root.right, key) 
+
+        # If key is same as root's key, then this is the node 
+        # to be deleted 
+        else: 
+            if root.count > 1:
+              root.count -= 1
+              return root
+            
+            # Node with only one child or no child 
+            if root.left is None : 
+                temp = root.right  
+                # if key == self.root.value:
+                #     self.root = None
+                #     return self
+                # else:
+                root = None 
+                return temp  
+
+            elif root.right is None : 
+                temp = root.left  
+                # if key == self.root.value:
+                #     self.root = None
+                #     return self
+                # else:
+                root = None 
+                return temp
+
+            # Node with two children: Get the inorder successor 
+            # (smallest in the right subtree) 
+            temp = self._find_min_node(root.right) 
+
+            # Copy the inorder successor's content to this node 
+            root.value = temp.value 
+
+            # Delete the inorder successor 
+            root.right = self._remove(root.right , temp.value) 
+
+
+        return root   
       
     # Returns height in terms of number of nodes from root to furthest leaf
     def height(self):

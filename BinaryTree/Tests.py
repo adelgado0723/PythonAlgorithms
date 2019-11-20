@@ -83,7 +83,7 @@ class TestBinaryTree(unittest.TestCase):
     
     #TODO: remove() isn't working... this test fails
     def test_remove_root_from_single_node_tree(self):
-        remove_test_tree = bst.BinarySearchTree();
+        remove_test_tree = bst.BinarySearchTree()
         remove_test_tree.insert(40)
         remove_test_tree.remove(40)
         root = remove_test_tree.get_root()
