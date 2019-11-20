@@ -134,59 +134,11 @@ class BinarySearchTree:
         if(self.root is not None):
             self.root = self._remove(self.root, value)
     
-    # def _remove(self, value, node):
-
-    #     # Find if there is a node in the tree with that value
-    #     # If not, just return
-    #     to_be_removed = self._find(value, node)
-
-    #     if(to_be_removed is None):
-    #         return
-
-    #     # If the count is greater than 1, decrement the count
-    #     if(to_be_removed.count > 1):
-    #         to_be_removed.count -= 1
-    #         return
-
-    #     # Fetch the parent
-    #     parent = self._find_parent(value, node)
-    #     to_be_removed_ref = None
-        
-    #     if(parent is None):
-    #         # to_be_removed is the root
-    #         to_be_removed_ref = self.root
-    #     else:
-    #         # Is to_be_removed the left or right child
-    #         if (parent.left.value == to_be_removed.value):
-    #             to_be_removed_ref = parent.left
-    #         else:
-    #             to_be_removed_ref = parent.right
-
-    #     # set the parent's reference to None
-    #     # If it is a leaf:
-    #     if (to_be_removed.left is None and to_be_removed.right is None):
-    #         to_be_removed_ref = None
-    #     # Else If it has a right child and no left child
-    #     elif(to_be_removed.left is None):
-    #         # Set the parent's reference to the right child sub-tree
-    #         to_be_removed_ref = to_be_removed.right
-    #     # Else If it has a left child and no right child
-    #     elif(to_be_removed.right is None):
-    #         # Set the parent's reference to the left child sub-tree
-    #         to_be_removed_ref = to_be_removed.left
-    #     # Else if it has two children
-    #     else:
-    #         # Set the parent's reference to the left child sub-tree
-    #         to_be_removed_ref = to_be_removed.left
-    #         # then, find the max node in that left sub-tree and
-    #         left_tree_max = self._find_max_node(to_be_removed.left)
-    #         # attach the right sub-tree to that node's right reference
-    #         left_tree_max.right = to_be_removed.right
-
-    #     return to_be_removed_ref
-
     # Given a binary search tree and a key, this function 
     # delete the key and returns the new root 
+    
+    # Returns either the node itself when coming back up the call stack
+    # or the node replacing the deleted node when it is found
     
     # From: https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
     def _remove(self, root, key): 
@@ -214,20 +166,12 @@ class BinarySearchTree:
             
             # Node with only one child or no child 
             if root.left is None : 
-                temp = root.right  
-                # if key == self.root.value:
-                #     self.root = None
-                #     return self
-                # else:
+                temp = root.right
                 root = None 
                 return temp  
 
             elif root.right is None : 
-                temp = root.left  
-                # if key == self.root.value:
-                #     self.root = None
-                #     return self
-                # else:
+                temp = root.left
                 root = None 
                 return temp
 
