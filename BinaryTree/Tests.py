@@ -1,27 +1,28 @@
-import sys
 import os.path
-utilsdir = os.path.dirname(__file__)
-sys.path.append(os.path.split(utilsdir)[0])
-import Utils.Utils as utils
+import sys
 import BinarySearchTree as bst
 import unittest
+utilsdir = os.path.dirname(__file__)
+sys.path.append(os.path.split(utilsdir)[0])
+
+import Utils.Utils as utils
+
 
 class TestBinaryTree(unittest.TestCase):
-
     def setUp(self):
-# The testing tree should look like this:
-#               30
-#          /         \
-#         /           \
-#        /             \
-#      10               43
-#     /  \           /      \
-#         21       34        45
-#        /  \     /  \       / \
-#      15             40        46
-#         
-# All nodes should have a count == 1
-# except for 46 with count == 4
+        # The testing tree should look like this:
+        #               30s
+        #          /         \
+        #         /           \
+        #        /             \
+        #      10               43
+        #     /  \           /      \
+        #         21       34        45
+        #        /  \     /  \       / \
+        #      15             40        46
+        #
+        # All nodes should have a count == 1
+        # except for 46 with count == 4
 
         self.empty_tree = bst.BinarySearchTree()
         self.tree = bst.BinarySearchTree()
@@ -39,8 +40,8 @@ class TestBinaryTree(unittest.TestCase):
         self.tree.insert(46)
         self.tree.insert(46)
 
-        
     # Testing get_root
+
     def test_get_root(self):
         self.assertEqual(self.tree.get_root().value, 30)
 
@@ -50,7 +51,7 @@ class TestBinaryTree(unittest.TestCase):
     # Testing find_max_node
     def test_find_max_node(self):
         self.assertEqual(self.tree.find_max_node().value, 46)
-    
+
     def test_find_max_node_when_empty_tree(self):
         self.assertIsNone(self.empty_tree.find_max_node())
 
@@ -60,37 +61,51 @@ class TestBinaryTree(unittest.TestCase):
 
     def test_find_min_node_when_empty_tree(self):
         self.assertIsNone(self.empty_tree.find_min_node())
-        
-    #Testing find
+
+    # Testing find
     def test_find_value_in_tree(self):
         self.assertEqual(self.tree.find(46).value, 46)
-    
+
     def test_find_value_not_in_tree(self):
         self.assertIsNone(self.tree.find(66))
-    
+
     def test_find_when_empty_tree(self):
         self.assertIsNone(self.empty_tree.find(46))
 
-    #Testing remove
+    # Testing remove
     def test_remove_duplicate_node_in_tree(self):
-        remove_test_tree = bst.BinarySearchTree();
+        remove_test_tree = bst.BinarySearchTree()
 
         remove_test_tree.insert(40)
         remove_test_tree.insert(46)
         remove_test_tree.insert(46)
         remove_test_tree.remove(46)
         self.assertEqual(remove_test_tree.find(46).count, 1)
-    
-    #TODO: remove() isn't working... this test fails
+
     def test_remove_root_from_single_node_tree(self):
         remove_test_tree = bst.BinarySearchTree()
         remove_test_tree.insert(40)
         remove_test_tree.remove(40)
         root = remove_test_tree.get_root()
-        self.assertIsNone(root);
-    
+        self.assertIsNone(root)
+
+    def test_remove_node_with_no_children(self):
+        remove_test_tree = bst.BinarySearchTree()
+        remove_test_tree.insert(40)
+        remove_test_tree.insert(16)
+        remove_test_tree.insert(49)
+        remove_test_tree.insert(39)
+        remove_test_tree.insert(22)
+        remove_test_tree.remove(16)
+        tree_list_after_removing = [22, 39, 40, 49]
+        self.assertEqual(remove_test_tree.size(), 4)
+        self.assertIsNone(remove_test_tree.find(16))
+        self.assertTrue(
+            utils.lists_have_same_elems_in_order(
+                remove_test_tree.list_in_order(), tree_list_after_removing))
 
     # Testing get_height
+
     def test_height(self):
         self.assertEqual(self.tree.height(), 4)
 
@@ -101,11 +116,13 @@ class TestBinaryTree(unittest.TestCase):
     def test_list_in_order(self):
         in_order_list = [10, 15, 21, 30, 34, 40, 43, 44, 45, 46, 46, 46, 46]
         in_order_from_tree = self.tree.list_in_order()
-        self.assertTrue(utils.lists_have_same_elems_in_order(in_order_list, in_order_from_tree))
-    
+        self.assertTrue(
+            utils.lists_have_same_elems_in_order(in_order_list,
+                                                 in_order_from_tree))
+
     def test_list_in_order_when_empty_tree(self):
         self.assertEqual(self.empty_tree.list_in_order(), [])
-    
+
     # Testing size
     def test_size(self):
         self.assertEqual(self.tree.size(), 13)

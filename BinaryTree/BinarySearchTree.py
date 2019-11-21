@@ -1,5 +1,6 @@
 import BinaryNode
 
+
 class BinarySearchTree:
 
     def __init__(self):
@@ -38,18 +39,18 @@ class BinarySearchTree:
         if(node is not None and node.value is not None):
             for i in range(node.count):
                 node_list.append(node.value)
-        
+
     def make_list(self, traversal_method):
         node_list = []
         traversal_method(self.root, self._insert_into_list, node_list)
         return node_list
-    
+
     def list_in_order(self):
         return self.make_list(self._traverse_in_order)
-    
+
     def list_pre_order(self):
         return self.make_list(self._traverse_pre_order)
-    
+
     def list_post_order(self):
         return self.make_list(self._traverse_post_order)
 
@@ -133,61 +134,60 @@ class BinarySearchTree:
     def remove(self, value):
         if(self.root is not None):
             self.root = self._remove(self.root, value)
-    
-    # Given a binary search tree and a key, this function 
-    # delete the key and returns the new root 
-    
+
+    # Given a binary search tree and a key, this function
+    # delete the key and returns the new root
+
     # Returns either the node itself when coming back up the call stack
     # or the node replacing the deleted node when it is found
-    
+
     # From: https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
-    def _remove(self, root, key): 
-  
-        # Base Case 
-        if root is None: 
-            return root  
+    def _remove(self, root, key):
 
-        # If the key to be deleted is smaller than the root's 
-        # key then it lies in  left subtree 
-        if key < root.value: 
-            root.left = self._remove(root.left, key) 
+        # Base Case
+        if root is None:
+            return root
 
-        # If the kye to be delete is greater than the root's key 
-        # then it lies in right subtree 
-        elif(key > root.value): 
-            root.right = self._remove(root.right, key) 
+        # If the key to be deleted is smaller than the root's
+        # key then it lies in  left subtree
+        if key < root.value:
+            root.left = self._remove(root.left, key)
 
-        # If key is same as root's key, then this is the node 
-        # to be deleted 
-        else: 
+        # If the kye to be delete is greater than the root's key
+        # then it lies in right subtree
+        elif(key > root.value):
+            root.right = self._remove(root.right, key)
+
+        # If key is same as root's key, then this is the node
+        # to be deleted
+        else:
             if root.count > 1:
-              root.count -= 1
-              return root
-            
-            # Node with only one child or no child 
-            if root.left is None : 
-                temp = root.right
-                root = None 
-                return temp  
+                root.count -= 1
+                return root
 
-            elif root.right is None : 
-                temp = root.left
-                root = None 
+            # Node with only one child or no child
+            if root.left is None:
+                temp = root.right
+                root = None
                 return temp
 
-            # Node with two children: Get the inorder successor 
-            # (smallest in the right subtree) 
-            temp = self._find_min_node(root.right) 
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
 
-            # Copy the inorder successor's content to this node 
-            root.value = temp.value 
+            # Node with two children: Get the inorder successor
+            # (smallest in the right subtree)
+            temp = self._find_min_node(root.right)
 
-            # Delete the inorder successor 
-            root.right = self._remove(root.right , temp.value) 
+            # Copy the inorder successor's content to this node
+            root.value = temp.value
 
+            # Delete the inorder successor
+            root.right = self._remove(root.right, temp.value)
 
-        return root   
-      
+        return root
+
     # Returns height in terms of number of nodes from root to furthest leaf
     def height(self):
         return self._get_height(self.root)
@@ -198,18 +198,18 @@ class BinarySearchTree:
         # if we wanted a height based on the number of edges
         if(node is None):
             return 0
-        
+
         left_tree_height = self._get_height(node.left)
         right_tree_height = self._get_height(node.right)
 
         if (left_tree_height > right_tree_height):
             return left_tree_height + 1
-        else: 
+        else:
             return right_tree_height + 1
 
     def size(self):
         return self._size(self.root)
-      
+
     def _size(self, node):
         if node is None:
             return 0
@@ -217,12 +217,13 @@ class BinarySearchTree:
 
     def size_no_dups(self):
         return self._size_no_dups(self.root)
-      
+
     def _size_no_dups(self, node):
         if node is None:
             return 0
         return self._size_no_dups(node.left) + self._size_no_dups(node.right) + 1
-            
+
+
 if __name__ == "__main__":
     tree = BinarySearchTree()
     tree.insert(10)
@@ -231,9 +232,8 @@ if __name__ == "__main__":
     tree.insert(9)
     tree.insert(12)
     tree.insert(18)
-    
+
     tree.print_in_order()
     tree_list = tree.list_in_order()
     for item in tree_list:
-      print(item)
-    
+        print(item)
