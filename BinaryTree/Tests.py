@@ -89,7 +89,7 @@ class TestBinaryTree(unittest.TestCase):
         root = remove_test_tree.get_root()
         self.assertIsNone(root)
 
-    def test_remove_node_with_no_children(self):
+    def test_remove_node_with_two_children(self):
         remove_test_tree = bst.BinarySearchTree()
         remove_test_tree.insert(40)
         remove_test_tree.insert(16)
@@ -103,6 +103,8 @@ class TestBinaryTree(unittest.TestCase):
         self.assertTrue(
             utils.lists_have_same_elems_in_order(
                 remove_test_tree.list_in_order(), tree_list_after_removing))
+        self.assertEqual(remove_test_tree.find_parent(22).value, 40)
+        self.assertEqual(remove_test_tree.find(22).right.value, 39)
 
     # Testing get_height
 
