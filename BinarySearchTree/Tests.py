@@ -8,7 +8,7 @@ sys.path.append(os.path.split(utilsdir)[0])
 import Utils.Utils as utils
 
 
-class TestBinaryTree(unittest.TestCase):
+class TestBinarySearchTree(unittest.TestCase):
     def setUp(self):
         # The testing tree should look like this:
         #               30s
