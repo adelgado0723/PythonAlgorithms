@@ -135,13 +135,9 @@ class BinarySearchTree:
         if(self.root is not None):
             self.root = self._remove(self.root, value)
 
-    # Given a binary search tree and a key, this function
-    # delete the key and returns the new node
-
-    # Returns either the node itself when coming back up the call stack
-    # or the node replacing the deleted node when it is found
-
-    # From: https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
+    # Given a binary node and a key, this function deletes the key and returns
+    # either the node itself when coming back up the call stack or the node
+    # replacing the deleted node when it is found.
     def _remove(self, node, key):
 
         # Base Case
@@ -155,7 +151,7 @@ class BinarySearchTree:
 
         # If the kye to be delete is greater than the node's key
         # then it lies in right subtree
-        elif(key > node.value):
+        elif key > node.value:
             node.right = self._remove(node.right, key)
 
         # If key is same as node's key, then this is the node
@@ -168,23 +164,30 @@ class BinarySearchTree:
             # Node with only one child or no child
             if node.left is None:
                 temp = node.right
+                # Releasing resources
                 node = None
                 return temp
 
             elif node.right is None:
                 temp = node.left
+                # Releasing resources
                 node = None
                 return temp
 
-            # Node with two children: Get the inorder successor
-            # (smallest in the right subtree)
-            temp = self._find_min_node(node.right)
+            else:
+                # Finds the min node from the right subtree
+                min = self._find_min_node(node.right)
 
-            # Copy the inorder successor's content to this node
-            node.value = temp.value
+                # Replaces the value of the node being removed with the min's
+                # value
+                node.value = min.value
 
-            # Delete the inorder successor
-            node.right = self._remove(node.right, temp.value)
+                # Remove that min node from the right subtree
+                node.right = self._remove(node.right, min.value)
+
+                # You could alternatively find the max of the left subtree, 
+                # replace the value of the node being removed with the max's 
+                # value, and then remove that max node from the left subtree
 
         return node
 
