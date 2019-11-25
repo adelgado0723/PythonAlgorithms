@@ -1,6 +1,6 @@
 # Data Structure Implementations in Python
 
-## (Binary Search Tree)[https://github.com/adelgado0723/PythonAlgorithms/BinarySearchTree/BinarySearchTree.py]
+## [Binary Search Tree](./BinarySearchTree/BinarySearchTree.py)
 
 The Binary Search Tree class is composed of Binary Nodes that each contain a
 reference to their left and right child, as well as a value and a count for
@@ -25,18 +25,18 @@ node and can be manipulated with the following public methods:
 - size()
 - size_no_dups()
 
-## (Binary Search Tree Unit Tests)[https://github.com/adelgado0723/PythonAlgorithms/BinarySearchTree/Tests.py]
+## [Binary Search Tree Unit Tests](./BinarySearchTree/Tests.py)
 
 The TestBinarySearchTree class contains a catalog of unit tests that test
 these public methods.
 
-## (Utils)[https://github.com/adelgado0723/PythonAlgorithms/Utils/Utils.py]
+## [Utils](./Utils/Utils.py)
 
 Utils.py contains utility functions that can be used in the testing process.
 These include:
 
 - lists_have_same_elems_in_order(first, second)
 
-## (Utils Unit Tests)[https://github.com/adelgado0723/PythonAlgorithms/Utils]
+## [Utils Unit Tests](./Utils)
 
 The TestUtils class contains unit tests for the functions in Utils.py.
