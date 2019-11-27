@@ -225,18 +225,3 @@ class BinarySearchTree:
         if node is None:
             return 0
         return self._size_no_dups(node.left) + self._size_no_dups(node.right) + 1
-
-
-if __name__ == "__main__":
-    tree = BinarySearchTree()
-    tree.insert(10)
-    tree.insert(3)
-    tree.insert(14)
-    tree.insert(9)
-    tree.insert(12)
-    tree.insert(18)
-
-    tree.print_in_order()
-    tree_list = tree.list_in_order()
-    for item in tree_list:
-        print(item)
