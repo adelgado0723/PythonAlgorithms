@@ -1,6 +1,6 @@
 import os.path
 import sys
-import AVLTree as bst
+import AVLTree as avl
 import unittest
 utilsdir = os.path.dirname(__file__)
 sys.path.append(os.path.split(utilsdir)[0])
@@ -8,7 +8,7 @@ sys.path.append(os.path.split(utilsdir)[0])
 import Utils.Utils as utils
 
 
-class TestBinarySearchTree(unittest.TestCase):
+class TestAVLTree(unittest.TestCase):
     def setUp(self):
         # The testing tree should look like this:
         #               30s
@@ -24,8 +24,8 @@ class TestBinarySearchTree(unittest.TestCase):
         # All nodes should have a count == 1
         # except for 46 with count == 4
 
-        self.empty_tree = bst.AVLTree()
-        self.tree = bst.AVLTree()
+        self.empty_tree = avl.AVLTree()
+        self.tree = avl.AVLTree()
         self.tree.insert(30)
         self.tree.insert(43)
         self.tree.insert(10)
@@ -73,7 +73,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
     # Testing remove
     def test_remove_duplicate_node_in_tree(self):
-        remove_test_tree = bst.AVLTree()
+        remove_test_tree = avl.AVLTree()
         remove_test_tree.insert(40)
         remove_test_tree.insert(46)
         remove_test_tree.insert(46)
@@ -82,7 +82,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(remove_test_tree.size(), 2)
     
     def test_remove_root_from_single_node_tree(self):
-        remove_test_tree = bst.AVLTree()
+        remove_test_tree = avl.AVLTree()
         remove_test_tree.insert(40)
         remove_test_tree.remove(40)
         root = remove_test_tree.get_root()
@@ -90,7 +90,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(remove_test_tree.size(), 0)
 
     def test_remove_node_with_no_children(self):
-        remove_test_tree = bst.AVLTree();
+        remove_test_tree = avl.AVLTree();
         remove_test_tree.insert(20)
         remove_test_tree.insert(46)
         remove_test_tree.insert(16)
@@ -99,7 +99,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertIsNone(remove_test_tree.find(16))
 
     def test_remove_node_with_left_child(self):
-        remove_test_tree = bst.AVLTree();
+        remove_test_tree = avl.AVLTree();
         remove_test_tree.insert(20)
         remove_test_tree.insert(46)
         remove_test_tree.insert(16)
@@ -110,7 +110,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(remove_test_tree.find(20).left.value, 15)
 
     def test_remove_node_with_right_child(self):
-        remove_test_tree = bst.AVLTree();
+        remove_test_tree = avl.AVLTree();
         remove_test_tree.insert(20)
         remove_test_tree.insert(46)
         remove_test_tree.insert(16)
@@ -121,7 +121,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(remove_test_tree.find(20).left.value, 17)
 
     def test_remove_node_with_two_children(self):
-        remove_test_tree = bst.AVLTree();
+        remove_test_tree = avl.AVLTree();
         remove_test_tree.insert(20)
         remove_test_tree.insert(46)
         remove_test_tree.insert(16)
@@ -134,7 +134,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(remove_test_tree.find(17).left.value, 15)
 
     def test_remove_node_not_in_tree(self):
-        remove_test_tree = bst.AVLTree();
+        remove_test_tree = avl.AVLTree();
         remove_test_tree.insert(20)
         remove_test_tree.insert(46)
         remove_test_tree.insert(16)

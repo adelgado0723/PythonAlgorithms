@@ -1,4 +1,10 @@
-import BinaryNode
+# import BinaryNode
+import os.path
+import sys
+rootdir = os.path.dirname(__file__)
+sys.path.append(os.path.split(rootdir)[0])
+
+from Utils.BinaryNode import BinaryNode
 
 
 class BinarySearchTree:
@@ -11,19 +17,19 @@ class BinarySearchTree:
 
     def insert(self, value):
         if(self.root is None):
-            self.root = BinaryNode.BinaryNode(value)
+            self.root = BinaryNode(value)
         else:
             self._insert_in_order(value, self.root)
 
     def _insert_in_order(self, value, node):
         if(value < node.value):
             if(node.left is None):
-                node.left = BinaryNode.BinaryNode(value)
+                node.left = BinaryNode(value)
             else:
                 self._insert_in_order(value, node.left)
         elif(value > node.value):
             if(node.right is None):
-                node.right = BinaryNode.BinaryNode(value)
+                node.right = BinaryNode(value)
             else:
                 self._insert_in_order(value, node.right)
         else:
