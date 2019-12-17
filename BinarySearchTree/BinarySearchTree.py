@@ -217,17 +217,15 @@ class BinarySearchTree:
             return right_tree_height + 1
 
     def size(self):
-        return self._size(self.root)
+        return self._size(self.root, dups=True)
 
-    def _size(self, node):
+    def _size(self, node, dups=False):
         if node is None:
             return 0
-        return self._size(node.left) + self._size(node.right) + node.count
+        count = 1
+        if dups:
+          count = node.count
+        return self._size(node.left, dups) + self._size(node.right, dups) + count
 
     def size_no_dups(self):
-        return self._size_no_dups(self.root)
-
-    def _size_no_dups(self, node):
-        if node is None:
-            return 0
-        return self._size_no_dups(node.left) + self._size_no_dups(node.right) + 1
+        return self._size(self.root)
